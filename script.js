@@ -95,22 +95,28 @@ console.table(emailsList);
 buttonForm.addEventListener('click', function() {
     const userEmailValue = (userEmail.value);
     console.log(userEmailValue);
-
-    textResult.innerText = 'La tua email non è autorizzata';
-    textResult.className = 'text-danger';
-    for (let i = 0; i < emailsList.length; i++) {
-        const email = emailsList[i];
-
-        const isIncluded = userEmailValue === email;
-        if (isIncluded) {
-            textResult.innerText = 'La tua email è autorizzata';
-            textResult.className = 'text-success';
+    // ! VALIDAZIONE
+    if (!userEmailValue) {
+        alert('Non hai inserito nessun carattere, inserisci una email');
+    } else if (!isNaN(userEmailValue)) {
+        alert("Hai inserito solo caratteri numerici, riprova");
+    } else {
+        textResult.innerText = 'La tua email non è autorizzata';
+        textResult.className = 'text-danger';
+        for (let i = 0; i < emailsList.length; i++) {
+            const email = emailsList[i];
+            
+            const isIncluded = userEmailValue === email;
+            if (isIncluded) {
+                textResult.innerText = 'La tua email è autorizzata';
+                textResult.className = 'text-success';
+            }
         }
+        form.reset();
     }
-    form.reset();
-})
-
-
+    })
+    
+    
 
 
 
