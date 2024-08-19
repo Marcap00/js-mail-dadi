@@ -49,3 +49,68 @@ button.addEventListener('click', function() {
     }
 })
 
+// ========================================================================= //
+
+/* 
+Inventa una lista di email autorizzate
+Chiedi all’utente la sua email, con un piccolo form.
+controlla che sia nella lista di chi può accedere,
+stampa un messaggio appropriato sull’esito del controllo.
+*/
+
+/* 
+1- Recuperiamo gli elementi dal DOM
+2- Mi preparo l'array con la lista di email autorizzate
+3- Recuperiamo il valore dell'input dell'utente
+4- Eseguiamo il controllo
+5- Stampiamo in pagina il risultato del controllo
+*/
+
+// # Fase di preparazione
+const form = document.querySelector('form');
+console.log(form);
+const userEmail = document.getElementById('user-email');
+console.log(userEmail);
+const buttonForm = document.getElementById('form-btn');
+console.log(buttonForm);
+const textResult = document.getElementById('text');
+console.log(textResult);
+
+// Prepariamo la lista di email autorizzate
+const emailsList = [
+    'marcorossi@gmail.com',
+    'robertorossi@gmail.com',
+    'giusepperossi@gmail.com',
+    'alessandrorossi@gmail.com',
+    'mariorossi@gmail.com',
+    'fabiorossi@gmail.com',
+    'damianorossi@gmail.com',
+    'francescorossi@gmail.com',
+    'francorossi@gmail.com',
+]
+console.table(emailsList);
+ 
+
+// # Fase di gestione eventi
+buttonForm.addEventListener('click', function() {
+    const userEmailValue = (userEmail.value);
+    console.log(userEmailValue);
+
+    textResult.innerText = 'La tua email non è autorizzata';
+    textResult.className = 'text-danger';
+    for (let i = 0; i < emailsList.length; i++) {
+        const email = emailsList[i];
+
+        const isIncluded = userEmailValue === email;
+        if (isIncluded) {
+            textResult.innerText = 'La tua email è autorizzata';
+            textResult.className = 'text-success';
+        }
+    }
+    form.reset();
+})
+
+
+
+
+
